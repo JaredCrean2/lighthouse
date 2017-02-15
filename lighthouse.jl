@@ -72,7 +72,8 @@ function lighthouse_reverse1(nu, gamma, omega, t, y1_bar, y2_bar)
   v3 = gamma - v2  # gamma - tan(omega*t)
   v4 = nu*v2  # nu*( tan(omega*t) )
   v5 = v4/v3  # nu*tan(omega*t)/(gamma - v2)
-  v6 = gamma*v5
+  v6 = v5
+  v7 = gamma*v5
 
   y1 = v5
   y2 = v6
@@ -92,10 +93,14 @@ function lighthouse_reverse1(nu, gamma, omega, t, y1_bar, y2_bar)
   gamma_bar = zero(gamma)
   nu_bar = zero(nu)
 
-  # v6 expression
+  # v7 expression
   # there is a misprint in the paper, v_{-2} should *not* have a bar
   v5_bar += gamma*y2_bar
   gamma_bar += v5*y2_bar
+
+  # v6 expression
+  v5_bar += v6_bar*1
+
 
   # v5 expression
   v4_bar += v5_bar(1/v3)
@@ -112,12 +117,12 @@ function lighthouse_reverse1(nu, gamma, omega, t, y1_bar, y2_bar)
   v2_bar += v3_bar*-1
 
   # v2 expression
-  v1_bar += v2_bar*(1/(cos(v1)^1))
+  v1_bar += v2_bar*(1/(cos(v1)^2))
 
-  
-
-
-
+  # v1 expression
+  omega_bar += v1_bar*t
+  t_bar += v1_bar*omega
+ 
 
   return y1, y2, nu_bar, gamma_bar, omega_bar, t_bar
 end

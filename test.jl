@@ -78,4 +78,28 @@ end
 end
 
 
+facts("----- Testing lighthouse reverse mode -----") do
+h = 1e-20
+pert = Complex128(0, h)
+
+jac_forward = zeros(2, 4)
+jac_reverse = zeros(2, 4)
+for nu in nu_vals
+  for gamma in gamma_vals
+    for omega in omega_vals
+      for t in t_vals
+        # compute the jacobian
+
+        y1, y2, nu_bar, gamma_bar, omega_bar, t_bar = lighthouse_reverse1(nu, gamma, omega, t, 1, 0)
+
+
+
+
+
+      end
+    end
+  end
+end
+
+end
 # construct jacobian by rows, columns
